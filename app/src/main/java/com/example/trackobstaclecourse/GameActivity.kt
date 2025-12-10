@@ -8,6 +8,8 @@ import android.os.Bundle
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
+import android.media.AudioAttributes
+import android.util.Log
 import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.ProgressBar
@@ -31,6 +33,8 @@ class GameActivity : AppCompatActivity(), GameView.GameListener {
     private var startingLives = 3
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        Log.w("GameActivity", "OnCreate")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
 
@@ -114,11 +118,21 @@ class GameActivity : AppCompatActivity(), GameView.GameListener {
 
     override fun onCollision() {
         // Vibrate on collision
+        Log.w("GameActivity", "OnCollision")
+
         val vibrationEnabled = sharedPreferences.getBoolean("vibration_enabled", true)
         if (vibrationEnabled) {
+            Log.w("GameActivity", "OnCollision - first if")
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                vibrator.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE))
+                Log.w("GameActivity", "OnCollision - second if")
+                val vibe = VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE)
+                val audioAttr = AudioAttributes.Builder()
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .setUsage(AudioAttributes.USAGE_GAME)
+                    .build()
+                vibrator.vibrate(vibe, audioAttr)
             } else {
+                Log.w("GameActivity", "OnCollision - else")
                 @Suppress("DEPRECATION")
                 vibrator.vibrate(200)
             }
