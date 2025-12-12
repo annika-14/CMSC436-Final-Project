@@ -12,7 +12,6 @@ import androidx.core.view.WindowInsetsCompat
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
-package com.example.final_project
 
 class MainActivity : AppCompatActivity() {
 
@@ -101,5 +100,6 @@ class MainActivity : AppCompatActivity() {
         highScoreText.text = getString(R.string.high_score_format, highScore)
     }
 }
+
 
 
