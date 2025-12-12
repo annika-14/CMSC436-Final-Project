@@ -57,15 +57,6 @@ A 3-track obstacle course Android game built with Kotlin for CMSC436.
 4. Wait for Gradle sync to complete
 5. Click **▶ Run** or press `Shift + F10`
 
-### Firebase Setup (Optional - for Leaderboard)
-1. Go to [Firebase Console](https://console.firebase.google.com/)
-2. Create a new project
-3. Add Android app with package: `com.example.trackobstaclecourse`
-4. Download `google-services.json`
-5. Place it in `app/` folder
-6. Uncomment Firebase plugin in `build.gradle.kts` files
-7. Enable **Realtime Database** in Firebase Console
-
 ---
 
 ## Project Structure
@@ -113,3 +104,4 @@ CMSC436-Final-Project/
 ## License
 
 This project is for educational purposes as part of CMSC436 coursework.
+
