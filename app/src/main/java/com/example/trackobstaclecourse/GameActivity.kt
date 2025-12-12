@@ -17,6 +17,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.trackobstaclecourse.MainActivity.Companion.currentTheme
 
 class GameActivity : AppCompatActivity(), GameView.GameListener {
 
@@ -32,7 +33,10 @@ class GameActivity : AppCompatActivity(), GameView.GameListener {
     private var score = 0
     private var startingLives = 3
 
+    private var activeTheme = MainActivity.currentTheme
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(MainActivity.currentTheme)
 
         Log.w("GameActivity", "OnCreate")
         super.onCreate(savedInstanceState)
@@ -177,6 +181,10 @@ class GameActivity : AppCompatActivity(), GameView.GameListener {
     override fun onResume() {
         super.onResume()
         // Don't auto-resume, let player decide
+        if (activeTheme != currentTheme) {
+            // If they are different, it means the user changed settings!
+            recreate() // Restart this screen to apply the new colors
+        }
     }
 
     override fun onDestroy() {
